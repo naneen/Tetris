@@ -252,7 +252,16 @@ public class Piece {
 	 to the first piece.
 	*/
 	private static Piece makeFastRotations(Piece root) {
-		return null; // YOUR CODE HERE
+		Piece nowP = root;
+		Piece nextP = root.computeNextRotation();
+		
+		while( !root.equals(nextP) ){
+			nowP.next = nextP;
+			nowP = nextP;
+			nextP = nextP.computeNextRotation();
+		}
+		nowP.next = root;
+		return root;
 	}
 	
 	
