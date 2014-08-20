@@ -26,14 +26,18 @@ public class BoardTest {
 		
 		s = new Piece(Piece.S1_STR);
 		sRotated = s.computeNextRotation();
-		
+		for(int i = 0; i < pyr1.getBody().length; i++) {
+			System.out.println(pyr1.getBody()[i].x + " " + pyr1.getBody()[i].y);
+		}
 		b.place(pyr1, 0, 0);
 	}
 	
 	// Check the basic width/height/max after the one placement
 	@Test
 	public void testSample1() {
+		System.out.println(b.getColumnHeight(0));
 		assertEquals(1, b.getColumnHeight(0));
+		
 		assertEquals(2, b.getColumnHeight(1));
 		assertEquals(2, b.getMaxHeight());
 		assertEquals(3, b.getRowWidth(0));

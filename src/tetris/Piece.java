@@ -252,15 +252,27 @@ public class Piece {
 	 to the first piece.
 	*/
 	private static Piece makeFastRotations(Piece root) {
-		Piece nowP = root;
-		Piece nextP = root.computeNextRotation();
+//		Piece nowP = root;
+//		Piece nextP = root.computeNextRotation();
+//		
+//		while( !root.equals(nextP) ){
+//			nowP.next = nextP;
+//			nowP = nextP;
+//			nextP = nowP.computeNextRotation();
+//		}
+//		nowP.next = root;
+//		return root;
 		
-		while( !root.equals(nextP) ){
-			nowP.next = nextP;
-			nowP = nextP;
-			nextP = nextP.computeNextRotation();
+		root.next = root.computeNextRotation();
+		Piece nextP = root.next;
+		
+		while ( !nextP.equals(root) ) {
+			nextP.next = nextP.computeNextRotation();
+			if ( nextP.next.equals(root) ) {
+				break;
+			}
+			nextP = nextP.next;
 		}
-		nowP.next = root;
 		return root;
 	}
 	
@@ -298,12 +310,12 @@ public class Piece {
 //	public static final String SQUARE_STR	= "0 0  0 1  1 0  1 1";
 //	public static final String PYRAMID_STR	= "0 0  1 0  1 1  2 0";
 	
-	public static void main(String[] args) {
-		Piece p = new Piece(Piece.PYRAMID_STR);
-//		for( int i=0; i<p.skirt.length ;i++ ){
-//			System.out.println(p.skirt[i]);
-//		}
-		p.computeNextRotation();
-		
-	}
+//	public static void main(String[] args) {
+//		Piece p = new Piece(Piece.PYRAMID_STR);
+////		for( int i=0; i<p.skirt.length ;i++ ){
+////			System.out.println(p.skirt[i]);
+////		}
+//		p.computeNextRotation();
+//		
+//	}
 }

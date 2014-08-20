@@ -16,6 +16,8 @@ public class Board	{
 	private boolean[][] grid;
 	private boolean DEBUG = true;
 	boolean committed;
+	private int[] widths;
+	private int[] heights;
 	
 	
 	// Here a few trivial methods are provided:
@@ -28,9 +30,12 @@ public class Board	{
 		this.width = width;
 		this.height = height;
 		grid = new boolean[width][height];
-		committed = true;
+		committed = true;	
 		
 		// YOUR CODE HERE
+		this.widths = new int[width];
+		this.heights = new int[height];
+		
 	}
 	
 	
@@ -55,7 +60,14 @@ public class Board	{
 	 For an empty board this is 0.
 	*/
 	public int getMaxHeight() {	 
-		return 0; // YOUR CODE HERE
+		// YOUR CODE HERE
+		int max = 0;
+		for( int i=0; i<this.width; i++ ){
+			if( getColumnHeight(i) > max ){
+				max = getColumnHeight(i);
+			}
+		}
+		return max;
 	}
 	
 	
@@ -89,7 +101,13 @@ public class Board	{
 	 The height is 0 if the column contains no blocks.
 	*/
 	public int getColumnHeight(int x) {
-		return 0; // YOUR CODE HERE
+		int maxH = 0;
+		for( int i=0; i<this.height; i++ ){
+			if( this.grid[x][i] && i>=maxH ){
+				maxH = i+1;
+			}
+		}
+		return maxH;
 	}
 	
 	
@@ -98,7 +116,13 @@ public class Board	{
 	 the given row.
 	*/
 	public int getRowWidth(int y) {
-		 return 0; // YOUR CODE HERE
+		 int countW = 0;
+		 for( int i=0; i<this.width; i++ ){
+			 if( grid[i][y] ){
+				 countW++;
+			 }
+		 }
+		 return countW;
 	}
 	
 	
@@ -136,10 +160,45 @@ public class Board	{
 		if (!committed) throw new RuntimeException("place commit problem");
 			
 		int result = PLACE_OK;
+		TPoint[] body = piece.getBody();
 		
 		// YOUR CODE HERE
+		if( y<0 || y>height || x<0 || x>width){
+			return PLACE_OUT_BOUNDS;
+		}
+		else if( this.isGridTrue(body,x,y) ){
+			return PLACE_BAD;
+		}
 		
+		this.fillGrid(body,x,y);
+//		for(int i = 0; i < width; i++) {
+//			for(int j = 0; j < height; j++) {
+//				System.out.println(grid[i][j]);
+//			}
+//		}
+//		System.out.println();
 		return result;
+	}
+	
+	private boolean isGridTrue(TPoint[] body, int bX, int bY){
+		boolean bool = false;
+		for( int i=0; i<body.length; i++ ){
+			int x = body[i].x+bX;
+			int y = body[i].y+bY;
+			if( grid[x][y] ){
+				bool = true;
+				break;
+			}
+		}
+		return bool;
+	}
+	
+	private void fillGrid(TPoint[] body, int bX, int bY){
+		for( int i=0; i<body.length; i++ ){
+			int x = body[i].x+bX;
+			int y = body[i].y+bY;
+			grid[x][y] = true;
+		}
 	}
 	
 	
