@@ -42,7 +42,8 @@ public class Piece {
 		this.skirt = calSkirt();
 		this.bodyNew = new TPoint[ body.length ];
 		for( int i=0; i<body.length; i++ ){
-			this.bodyNew[i] = this.body[i];
+			TPoint tempT = new TPoint(this.body[i].x, this.body[i].y);
+			this.bodyNew[i] = tempT;
 		}
 	}
 	
@@ -252,17 +253,6 @@ public class Piece {
 	 to the first piece.
 	*/
 	private static Piece makeFastRotations(Piece root) {
-//		Piece nowP = root;
-//		Piece nextP = root.computeNextRotation();
-//		
-//		while( !root.equals(nextP) ){
-//			nowP.next = nextP;
-//			nowP = nextP;
-//			nextP = nowP.computeNextRotation();
-//		}
-//		nowP.next = root;
-//		return root;
-		
 		root.next = root.computeNextRotation();
 		Piece nextP = root.next;
 		
@@ -273,6 +263,7 @@ public class Piece {
 			}
 			nextP = nextP.next;
 		}
+		nextP.next = root;
 		return root;
 	}
 	
