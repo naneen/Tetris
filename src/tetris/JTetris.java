@@ -103,8 +103,7 @@ public class JTetris extends JComponent {
 
 		// Set component size to allow given pixels for each block plus
 		// a 1 pixel border around the whole thing.
-		setPreferredSize(new Dimension((WIDTH * pixels)+2,
-				(HEIGHT+TOP_SPACE)*pixels+2));
+		setPreferredSize(new Dimension((WIDTH * pixels)+2, (HEIGHT+TOP_SPACE)*pixels+2));
 		gameOn = false;
 		
 		pieces = Piece.getPieces();
@@ -550,14 +549,17 @@ public class JTetris extends JComponent {
 	public void paintComponent(Graphics g) {
 		
 		// Draw a rect around the whole thing
+		g.setColor(Color.DARK_GRAY);
 		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
-		
+		g.setColor(Color.GRAY);
+		g.fillRect(0, 0, getWidth()-1, getHeight()-1);
 		
 		// Draw the line separating the top
+		g.setColor(Color.WHITE);
 		int spacerY = yPixel(board.getHeight() - TOP_SPACE - 1);
-		g.drawLine(0, spacerY, getWidth()-1, spacerY);
-
-
+		g.drawLine(0, spacerY, getWidth()-1, spacerY);	
+		
+		
 		// check if we are drawing with clipping
 		//Shape shape = g.getClip();
 		Rectangle clip = null;
@@ -584,18 +586,22 @@ public class JTetris extends JComponent {
 			if (DRAW_OPTIMIZE && clip!=null) {
 				if ((right<clip.x) || (left>=(clip.x+clip.width))) continue;
 			}
-			
+			g.setColor(Color.ORANGE);
 			// draw from 0 up to the col height
 			final int yHeight = board.getColumnHeight(x);
 			for (y=0; y<yHeight; y++) {
 				if (board.getGrid(x, y)) {
 					boolean filled = (board.getRowWidth(y)==bWidth);
 					if (filled) g.setColor(Color.green);
-					
 					g.fillRect(left+1, yPixel(y)+1, dx, dy);	// +1 to leave a white border
 					
-					if (filled) g.setColor(Color.black);
+					if (filled) g.setColor(Color.WHITE);
 				}
+			}
+			
+			if( gameOn == false ){
+				g.setColor(Color.RED);
+				g.drawLine(0, spacerY, getWidth()-1, spacerY);
 			}
 		}
 	}

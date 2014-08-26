@@ -82,10 +82,18 @@ public class Board {
 	 * O(skirt length).
 	 */
 	public int dropHeight(Piece piece, int x) {
-		// int[] skirt = piece.getSkirt();
-		// int col =
-		// for( int i=0; )
-		return 0;
+		int[] skirt = piece.getSkirt();
+		int maxH = heights[x];
+		for( int i=0; i<skirt.length; i++ ){
+			System.out.println("for loop");
+			int dropH = heights[x+i]-skirt[i];
+			if( maxH < dropH){
+				System.out.println("if condition");
+				maxH = this.heights[x];
+			}
+		}
+		System.out.println("end");
+		return maxH;
 	}
 
 	/**
