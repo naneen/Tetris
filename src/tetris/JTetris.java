@@ -681,7 +681,6 @@ public class JTetris extends JComponent {
 		testButton = new JCheckBox("Test sequence");
 		panel.add(testButton);
 		
-		
 		return panel;
 	}
 	

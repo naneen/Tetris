@@ -83,16 +83,12 @@ public class Board {
 	 */
 	public int dropHeight(Piece piece, int x) {
 		int[] skirt = piece.getSkirt();
-		int maxH = heights[x];
+		int maxH = this.getColumnHeight(x);
 		for( int i=0; i<skirt.length; i++ ){
-			System.out.println("for loop");
-			int dropH = heights[x+i]-skirt[i];
-			if( maxH < dropH){
-				System.out.println("if condition");
-				maxH = this.heights[x];
+			if( maxH<this.getColumnHeight(i+x)  - skirt[i]){
+				maxH = this.getColumnHeight(i+x) - skirt[i];
 			}
 		}
-		System.out.println("end");
 		return maxH;
 	}
 
