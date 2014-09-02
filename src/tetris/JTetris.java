@@ -290,7 +290,6 @@ public class JTetris extends JComponent {
 		int pieceNum;
 		
 		pieceNum = (int) (pieces.length * random.nextDouble());
-		
 		Piece piece	 = pieces[pieceNum];
 		
 		return(piece);

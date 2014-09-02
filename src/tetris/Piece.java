@@ -178,17 +178,7 @@ public class Piece {
 		Piece other = (Piece)obj;	
 		List<TPoint> thisPoints = Arrays.asList(this.body);
 		List<TPoint> otherPoints = Arrays.asList(other.body);
-		
 		return thisPoints.containsAll(otherPoints);
-		
-//		if( this.width == other.width && this.height == other.height ){
-//			for( int i=0; i<this.skirt.length; i++ ){
-//				if( this.skirt[i] != other.skirt[i] ){
-//					return false;
-//				}
-//			}
-//		}
-//		return true;
 	}
 
 	// String constants for the standard 7 tetris pieces

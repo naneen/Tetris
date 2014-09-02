@@ -14,8 +14,7 @@ public class Board {
 	private boolean[][] grid, backup;
 	private boolean DEBUG = true;
 	boolean committed;
-	private int[] widths;
-	private int[] heights;
+	
 
 	// Here a few trivial methods are provided:
 
@@ -30,8 +29,7 @@ public class Board {
 		committed = true;
 
 		// YOUR CODE HERE
-		this.widths = new int[width];
-		this.heights = new int[height];
+	
 
 	}
 
@@ -158,7 +156,8 @@ public class Board {
 		// YOUR CODE HERE
 		if (y < 0 || (y+piece.getHeight()) > height || x < 0 || (x+piece.getWidth()) > width) {
 			return PLACE_OUT_BOUNDS;
-		} else if (this.isGridTrue(body, x, y)) {
+		} 
+		else if (this.isGridTrue(body, x, y)) {
 			return PLACE_BAD;
 		}
 
@@ -217,6 +216,13 @@ public class Board {
 				this.moveGridDown(y);
 				y--;
 			}
+//			if (count == width) {
+//				for( int xx =0; xx<this.width; xx++){
+//					for( int yy=0l yy<this.height; yy++ ){
+//						grid[xx]
+//					}
+//				}
+//			}
 		}
 		sanityCheck();
 		return rowsCleared;
